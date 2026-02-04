@@ -106,10 +106,14 @@ export default async function WikiPage({ params }: PageProps) {
   const { data: frontmatter, content: markdownContent } = matter(
     fs.readFileSync(absolutePath, "utf8"),
   );
-  const pageTitle = frontmatter.title ?? slug[slug.length - 1];
+  const rawTitle = frontmatter.title ?? slug[slug.length - 1];
+
+  const pageTitle = rawTitle
+    .replace(/_/g, " ")
+    .replace(/^./, (c: string) => c.toUpperCase());
 
   return (
-    <article className="prose prose-sm sm:prose-base lg:prose-lg max-w-[300px] lg:max-w-full mx-auto sm:px-4 lg:px-4">
+    <article className="prose prose-sm sm:prose-base lg:prose-lg max-w-[300px] md:max-w-full mx-auto sm:px-4 md:px-4">
       <h1>{pageTitle}</h1>
       <ReactMarkdown components={markdownComponents}>
         {markdownContent}

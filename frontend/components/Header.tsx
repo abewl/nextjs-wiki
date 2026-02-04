@@ -2,19 +2,29 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <header className="bg-white text-gray-900 p-4 shadow-md">
-      <div className="container mx-auto flex justify-between items-center">
-        <h1 className="text-xl font-bold">
-          <Link href="/">Wiki</Link>
-        </h1>
+      <div className="container md:mx-12 flex justify-between items-center">
+        <div className="flex flex-row">
+          <Image
+            src="/wiki-logo.svg"
+            alt="Wiki Logo"
+            width={50}
+            height={50}
+            priority
+          />
+          <span className="text-lg m-auto font-bold">
+            <Link href="/">Wiki</Link>
+          </span>
+        </div>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex space-x-12">
+        <nav className="hidden md:flex space-x-24 mr-24">
           <Link href="/wiki">Wiki</Link>
           <Link href="/about">About</Link>
           <Link href="/contact">Contact</Link>

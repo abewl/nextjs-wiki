@@ -12,7 +12,7 @@ export default function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="en">
       <head>
-        <title>Game Wiki</title>
+        <title>NextJS Wiki</title>
       </head>
       <body className="flex flex-col min-h-screen">
         <Header />

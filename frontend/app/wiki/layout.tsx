@@ -18,7 +18,7 @@ export default async function WikiLayout({
       {/* Sidebar */}
       <aside
         className="shrink-0 border-r border-gray-200 transition-all duration-300
-                        w-12 md:w-64"
+                        w-12 lg:w-64"
       >
         <SidebarTree nodes={tree} currentSlug={currentSlug} />
       </aside>
