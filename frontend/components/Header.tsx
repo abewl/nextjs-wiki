@@ -5,7 +5,7 @@ export default function Header() {
     <header className="bg-white text-gray-900 p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
         <h1 className="text-xl font-bold">
-          <Link href="/">Nextjs Base</Link>
+          <Link href="/">Wiki</Link>
         </h1>
         <nav className="space-x-24">
           <Link href="/services">Services</Link>

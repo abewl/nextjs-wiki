@@ -1,0 +1,40 @@
+[
+  {
+    "slug": "guides/install",
+    "title": "Installing the Wiki",
+    "headers": [
+      "This is H2"
+    ],
+    "content": "\n## This is H2\nThis page explains how to install the wiki system locally.\n\n1. Clone the repository\n2. Install dependencies with `npm install`\n3. Run the development server with `npm run dev`\n"
+  },
+  {
+    "slug": "guides/routes/routing",
+    "title": "routing",
+    "headers": [],
+    "content": "Routing content\n"
+  },
+  {
+    "slug": "index",
+    "title": "index",
+    "headers": [],
+    "content": "Index page\nContent\n"
+  },
+  {
+    "slug": "newpage",
+    "title": "newpage",
+    "headers": [],
+    "content": "Getting started page\nContent\n"
+  },
+  {
+    "slug": "newpage2",
+    "title": "newpage2",
+    "headers": [],
+    "content": "Test content 2\n"
+  },
+  {
+    "slug": "slug1/slug2/slug3/slugpage",
+    "title": "slugpage",
+    "headers": [],
+    "content": "Slug page test\n"
+  }
+]

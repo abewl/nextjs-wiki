@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import ReactMarkdown from "react-markdown";
+import matter from "gray-matter";
 
 type PageProps = {
   params: Promise<{
@@ -74,7 +75,11 @@ export default async function WikiPage({ params }: PageProps) {
 
   const absolutePath = exists.directExists ? directFile : indexFile;
 
-  const markdownContent = fs.readFileSync(absolutePath, "utf8");
+  const { data: frontmatter, content: markdownContent } = matter(
+    fs.readFileSync(absolutePath, "utf8"),
+  );
+
+  const pageTitle = frontmatter.title ?? slug[slug.length - 1];
 
   return (
     <article>
@@ -88,7 +93,7 @@ export default async function WikiPage({ params }: PageProps) {
           2,
         )}
       </pre>
-
+      <h1>{pageTitle}</h1>
       <ReactMarkdown>{markdownContent}</ReactMarkdown>
     </article>
   );

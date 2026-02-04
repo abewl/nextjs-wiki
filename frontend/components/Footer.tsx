@@ -14,7 +14,7 @@ export default function Footer() {
       <div className="container mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Company Info */}
         <div>
-          <h2 className="text-lg font-bold mb-4">Nextjs Base</h2>
+          <h2 className="text-lg font-bold mb-4">Wiki</h2>
           <p className="text-gray-400">Footer text</p>
         </div>
 
