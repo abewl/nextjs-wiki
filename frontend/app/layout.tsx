@@ -18,7 +18,9 @@ export default function RootLayout({ children }: LayoutProps) {
         <Header />
 
         {/* Main content */}
-        <main className="flex-1 container mx-auto p-4">{children}</main>
+        <main className="flex-1 w-full max-w-full px-4 sm:px-6 lg:px-8 mx-auto overflow-x-hidden">
+          {children}
+        </main>
 
         <Footer />
       </body>

@@ -14,26 +14,17 @@ export default async function WikiLayout({
   const currentSlug = resolvedParams?.slug ?? [];
 
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "240px 1fr",
-        minHeight: "100vh",
-      }}
-    >
+    <div className="flex min-h-screen">
+      {/* Sidebar */}
       <aside
-        style={{
-          borderRight: "1px solid #e5e7eb",
-          padding: "1rem",
-          fontSize: "14px",
-        }}
+        className="shrink-0 border-r border-gray-200 transition-all duration-300
+                        w-12 md:w-64"
       >
-        <strong style={{ display: "block", marginBottom: 8 }}>Wiki</strong>
-
         <SidebarTree nodes={tree} currentSlug={currentSlug} />
       </aside>
 
-      <main style={{ padding: "2rem" }}>{children}</main>
+      {/* Main content */}
+      <main className="flex-1 p-4 md:p-8">{children}</main>
     </div>
   );
 }

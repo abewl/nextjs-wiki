@@ -2,6 +2,9 @@ import fs from "fs";
 import path from "path";
 import ReactMarkdown from "react-markdown";
 import matter from "gray-matter";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import type { Components } from "react-markdown";
 
 type PageProps = {
   params: Promise<{
@@ -13,34 +16,61 @@ const CONTENT_ROOT = path.join(process.cwd(), "content", "docs");
 
 export const dynamicParams = false;
 
+const markdownComponents: Components = {
+  blockquote: ({ children }) => (
+    <blockquote className="border-l-4 border-gray-300 pl-4 italic text-gray-700 my-4">
+      {children}
+    </blockquote>
+  ),
+  code: ({ className, children, ...props }) => {
+    const match = /language-(\w+)/.exec(className || "");
+
+    if (match) {
+      return (
+        <SyntaxHighlighter
+          style={oneDark}
+          language={match[1]}
+          PreTag="div"
+          className="rounded-md my-4"
+        >
+          {String(children).replace(/\n$/, "")}
+        </SyntaxHighlighter>
+      );
+    }
+
+    return (
+      <code
+        className="bg-gray-100 px-1.5 py-0.5 rounded text-sm font-mono text-pink-600"
+        {...props}
+      >
+        {children}
+      </code>
+    );
+  },
+};
+
+function walk(dir: string, base: string[] = []): Array<{ slug: string[] }> {
+  return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    if (entry.isDirectory()) {
+      return walk(path.join(dir, entry.name), [...base, entry.name]);
+    }
+    if (entry.isFile() && entry.name.endsWith(".md")) {
+      if (entry.name === "index.md") return [];
+      return [{ slug: [...base, entry.name.replace(/\.md$/, "")] }];
+    }
+    return [];
+  });
+}
+
 export async function generateStaticParams(): Promise<
   Array<{ slug: string[] }>
 > {
-  const walk = (
-    dir: string,
-    base: string[] = [],
-  ): Array<{ slug: string[] }> => {
-    return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
-      if (entry.isDirectory()) {
-        return walk(path.join(dir, entry.name), [...base, entry.name]);
-      }
-
-      if (entry.isFile() && entry.name.endsWith(".md")) {
-        if (entry.name === "index.md") return [];
-        return [{ slug: [...base, entry.name.replace(/\.md$/, "")] }];
-      }
-
-      return [];
-    });
-  };
-
   return walk(CONTENT_ROOT);
 }
 
 export default async function WikiPage({ params }: PageProps) {
   const resolvedParams = await params;
   const slug = resolvedParams?.slug;
-
   const debug = {
     cwd: process.cwd(),
     slug,
@@ -57,7 +87,6 @@ export default async function WikiPage({ params }: PageProps) {
 
   const directFile = path.join(CONTENT_ROOT, `${slug.join("/")}.md`);
   const indexFile = path.join(CONTENT_ROOT, ...slug, "index.md");
-
   const exists = {
     directFile,
     directExists: fs.existsSync(directFile),
@@ -74,27 +103,17 @@ export default async function WikiPage({ params }: PageProps) {
   }
 
   const absolutePath = exists.directExists ? directFile : indexFile;
-
   const { data: frontmatter, content: markdownContent } = matter(
     fs.readFileSync(absolutePath, "utf8"),
   );
-
   const pageTitle = frontmatter.title ?? slug[slug.length - 1];
 
   return (
-    <article>
-      <pre style={{ background: "#eef", padding: 16 }}>
-        {JSON.stringify(
-          {
-            note: "RENDERING MARKDOWN",
-            // absolutePath,
-          },
-          null,
-          2,
-        )}
-      </pre>
+    <article className="prose prose-sm sm:prose-base lg:prose-lg max-w-[300px] lg:max-w-full mx-auto sm:px-4 lg:px-4">
       <h1>{pageTitle}</h1>
-      <ReactMarkdown>{markdownContent}</ReactMarkdown>
+      <ReactMarkdown components={markdownComponents}>
+        {markdownContent}
+      </ReactMarkdown>
     </article>
   );
 }
