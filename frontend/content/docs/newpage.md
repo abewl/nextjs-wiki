@@ -1,0 +1,2 @@
+Getting started page
+Content
