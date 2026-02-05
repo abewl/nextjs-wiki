@@ -32,6 +32,8 @@ export default function Home() {
               <Link
                 className="text-blue-800 hover:text-blue-900"
                 href="https://www.npmjs.com/package/react-markdown"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 react-markdown
               </Link>
@@ -41,6 +43,8 @@ export default function Home() {
               <Link
                 className="text-blue-800 hover:text-blue-900"
                 href="https://www.npmjs.com/package/gray-matter"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 gray-matter
               </Link>
@@ -51,6 +55,8 @@ export default function Home() {
               <Link
                 className="text-blue-800 hover:text-blue-900"
                 href="https://www.fusejs.io/"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 Fusejs
               </Link>
@@ -60,6 +66,8 @@ export default function Home() {
               <Link
                 className="text-blue-800 hover:text-blue-900"
                 href="https://www.npmjs.com/package/react-highlight?activeTab=readme"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 react-highlight
               </Link>
@@ -69,30 +77,32 @@ export default function Home() {
 
         {/* Call-to-action buttons */}
         <div className="flex flex-col gap-4 text-base font-medium sm:flex-row mt-8">
-          <a
+          <Link
             className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-black px-5 text-white transition-colors hover:bg-zinc-800 md:w-[180px]"
             href="/wiki"
           >
             Demo the Wiki
-          </a>
-          <a
+          </Link>
+          <Link
             className="flex h-12 w-full items-center justify-center rounded-full border border-black/20 px-5 transition-colors hover:border-transparent hover:bg-zinc-100 md:w-[180px]"
             href="/about"
           >
             About the project
-          </a>
+          </Link>
         </div>
 
         {/* Optional description or resources */}
         <div className="mt-16 text-zinc-600 text-sm max-w-md sm:text-left text-center">
           <p>
             Check out the{" "}
-            <a
+            <Link
               href="https://github.com/abewl/nextjs-wiki"
               className="font-medium text-black underline"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               NextJS Wiki Github page
-            </a>
+            </Link>
             .
           </p>
         </div>

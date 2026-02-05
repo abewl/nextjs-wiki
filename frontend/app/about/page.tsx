@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const AboutPage = () => {
   return (
     <div className="container mx-auto p-4 mt-6">
@@ -18,12 +20,14 @@ const AboutPage = () => {
       </p>
       <p>
         Check out the{" "}
-        <a
+        <Link
           href="https://github.com/abewl/nextjs-wiki"
           className="font-medium text-black underline"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           NextJS Wiki Github page
-        </a>
+        </Link>
         .
       </p>
     </div>
