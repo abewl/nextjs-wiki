@@ -1,5 +1,6 @@
-# Simple NextJS Wiki template  
-with essential batteries
+# Simple NextJS Wiki template 
+
+Demo [link here](https://wikidemo.codehub.com.au/)
 
 - Static deployment
 - Slug routing for nested pages
