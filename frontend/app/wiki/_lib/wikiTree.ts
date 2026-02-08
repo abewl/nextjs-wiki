@@ -71,6 +71,14 @@ export function buildWikiTree(
     }
   }
 
-  // nice stable ordering
-  return nodes.sort((a, b) => a.title.localeCompare(b.title));
+  return nodes.sort((a, b) => {
+    const orderA = a.order ?? 1000;
+    const orderB = b.order ?? 1000;
+
+    if (orderA !== orderB) {
+      return orderA - orderB;
+    }
+
+    return a.title.localeCompare(b.title);
+  });
 }
